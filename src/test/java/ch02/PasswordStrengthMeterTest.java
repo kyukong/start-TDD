@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PasswordStrengthMeterTest {
 
+    private final PasswordStrengthMeter meter = new PasswordStrengthMeter();
+
     /**
      * TDD 예: 암호 검사기
      *
@@ -22,22 +24,20 @@ public class PasswordStrengthMeterTest {
     @DisplayName("모든 조건을 만족하는 경우")
     @Test
     void strong() {
-        PasswordStrengthMeter passwordStrengthMeter = new PasswordStrengthMeter();
-        PasswordStrength meter = passwordStrengthMeter.meter("1234ABCD");
-
-        assertEquals(meter, PasswordStrength.STRONG);
+        assertEquals(meter.meter("1234ABCD"), PasswordStrength.STRONG);
     }
 
     @DisplayName("길이가 8 글자 미만이며 다른 조건은 만족하는 경우")
     @Test
     void normal_length_under_8() {
-        PasswordStrengthMeter passwordStrengthMeter = new PasswordStrengthMeter();
-        PasswordStrength meter = passwordStrengthMeter.meter("123ABCD");
-
-        assertEquals(meter, PasswordStrength.NORMAL);
+        assertEquals(meter.meter("123ABCD"), PasswordStrength.NORMAL);
     }
 
-    // TODO: 0 부터 9 사이의 숫자를 포함하지 않는 경우 -> 보통
+    @DisplayName("숫자를 포함하지 않으며 다른 조건은 만족하는 경우")
+    @Test
+    void normal_not_contains_number() {
+        assertEquals(meter.meter("ABCDEFGH"), PasswordStrength.NORMAL);
+    }
 
     // TODO: 대문자를 포함하지 않는 경우 -> 보통
 
