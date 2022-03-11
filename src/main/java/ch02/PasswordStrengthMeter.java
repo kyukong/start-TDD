@@ -11,7 +11,7 @@ public class PasswordStrengthMeter {
             return PasswordStrength.INVALID;
         }
         int meet = checkConditions(password);
-        if (meet == MEET_WEAK) {
+        if (meet <= MEET_WEAK) {
             return PasswordStrength.WEAK;
         }
         if (meet == MEET_NORMAL) {

@@ -75,5 +75,9 @@ public class PasswordStrengthMeterTest {
         assertEquals(PasswordStrength.WEAK, meter.meter("ABCDEFG"));
     }
 
-    // TODO: 모든 검증 실패
+    @DisplayName("아무 조건도 만족하지 않는 경우")
+    @Test
+    void weak_not_meet_any_conditions() {
+        assertEquals(PasswordStrength.WEAK, meter.meter("abc"));
+    }
 }
