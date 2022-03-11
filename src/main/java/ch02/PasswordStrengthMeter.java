@@ -8,26 +8,39 @@ public class PasswordStrengthMeter {
         if (isNullOrEmpty(password)) {
             return PasswordStrength.INVALID;
         }
-        if (isUnderValidLength(password) || !(isContainsNumber(password))) {
+        if (isNormal(password)) {
             return PasswordStrength.NORMAL;
         }
         return PasswordStrength.STRONG;
     }
 
-    private boolean isNullOrEmpty(final String password) {
-        return password == null || password.isEmpty();
+    private boolean isNullOrEmpty(final String string) {
+        return string == null || string.isEmpty();
     }
 
-    private boolean isUnderValidLength(final String password) {
-        return password.length() < PASSWORD_LENGTH_MINIMUM;
+    private boolean isNormal(final String password) {
+        return isUnderValidLength(password) || isNotContainsNumber(password) || isNotContainsCapital(password);
     }
 
-    private boolean isContainsNumber(final String password) {
-        for (String text : password.split("")) {
+    private boolean isUnderValidLength(final String string) {
+        return string.length() < PASSWORD_LENGTH_MINIMUM;
+    }
+
+    private boolean isNotContainsNumber(final String string) {
+        for (String text : string.split("")) {
             if (text.matches("[0-9]+")) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
+    }
+
+    private boolean isNotContainsCapital(final String string) {
+        for (String text : string.split("")) {
+            if (text.matches("[A-Z]+")) {
+                return false;
+            }
+        }
+        return true;
     }
 }

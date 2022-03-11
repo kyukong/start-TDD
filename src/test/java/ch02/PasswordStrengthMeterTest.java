@@ -51,7 +51,11 @@ public class PasswordStrengthMeterTest {
         assertEquals(meter.meter("ABCDEFGH"), PasswordStrength.NORMAL);
     }
 
-    // TODO: 대문자를 포함하지 않는 경우 -> 보통
+    @DisplayName("대문자를 포함하지 않으며 다른 조건은 만족하는 경우")
+    @Test
+    void normal_not_contains_capital() {
+        assertEquals(meter.meter("1234abcd"), PasswordStrength.NORMAL);
+    }
 
     // TODO: 길이가 7 글자이며 0 부터 9 사이의 숫자를 포함하지 않는 경우 -> 약함
 
