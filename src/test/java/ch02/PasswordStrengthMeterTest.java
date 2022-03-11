@@ -57,11 +57,15 @@ public class PasswordStrengthMeterTest {
         assertEquals(meter.meter("1234abcd"), PasswordStrength.NORMAL);
     }
 
+    @DisplayName("길이가 8 글자 이상인 조건만 만족하는 경우")
+    @Test
+    void weak_only_length_over_8() {
+        assertEquals(meter.meter("abcdefgh"), PasswordStrength.WEAK);
+    }
+
     // TODO: 길이가 7 글자이며 0 부터 9 사이의 숫자를 포함하지 않는 경우 -> 약함
 
     // TODO: 길이가 7 글자이며 대문자를 포함하지 않는 경우 -> 약함
-
-    // TODO: 0 부터 9 사이의 숫자를 포함하지 않으며 대문자를 포함하지 않는 경우 -> 약함
 
     // TODO: 모든 검증 실패
 }
