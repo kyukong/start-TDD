@@ -21,6 +21,18 @@ public class PasswordStrengthMeterTest {
      * - 1 개 이하의 규칙을 충족하면 암호는 약함이다.
      */
 
+    @DisplayName("null 을 입력한 경우")
+    @Test
+    void password_null() {
+        assertEquals(meter.meter(null), PasswordStrength.INVALID);
+    }
+
+    @DisplayName("빈 값을 입력한 경우")
+    @Test
+    void password_empty() {
+        assertEquals(meter.meter(""), PasswordStrength.INVALID);
+    }
+
     @DisplayName("모든 조건을 만족하는 경우")
     @Test
     void strong() {

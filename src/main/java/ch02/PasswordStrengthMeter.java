@@ -5,10 +5,17 @@ public class PasswordStrengthMeter {
     private static final int PASSWORD_LENGTH_MINIMUM = 8;
 
     public PasswordStrength meter(final String password) {
+        if (isNullOrEmpty(password)) {
+            return PasswordStrength.INVALID;
+        }
         if (isUnderValidLength(password) || !(isContainsNumber(password))) {
             return PasswordStrength.NORMAL;
         }
         return PasswordStrength.STRONG;
+    }
+
+    private boolean isNullOrEmpty(final String password) {
+        return password == null || password.isEmpty();
     }
 
     private boolean isUnderValidLength(final String password) {
