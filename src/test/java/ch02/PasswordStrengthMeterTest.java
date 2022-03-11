@@ -69,9 +69,11 @@ public class PasswordStrengthMeterTest {
         assertEquals(PasswordStrength.WEAK, meter.meter("1234567"));
     }
 
-    // TODO: 길이가 7 글자이며 0 부터 9 사이의 숫자를 포함하지 않는 경우 -> 약함
-
-    // TODO: 길이가 7 글자이며 대문자를 포함하지 않는 경우 -> 약함
+    @DisplayName("대문자 포함 조건만 만족하는 경우")
+    @Test
+    void weak_only_contains_capital() {
+        assertEquals(PasswordStrength.WEAK, meter.meter("ABCDEFG"));
+    }
 
     // TODO: 모든 검증 실패
 }
