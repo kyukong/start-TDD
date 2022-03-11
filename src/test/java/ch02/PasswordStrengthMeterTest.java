@@ -24,43 +24,49 @@ public class PasswordStrengthMeterTest {
     @DisplayName("null 을 입력한 경우")
     @Test
     void password_null() {
-        assertEquals(meter.meter(null), PasswordStrength.INVALID);
+        assertEquals(PasswordStrength.INVALID, meter.meter(null));
     }
 
     @DisplayName("빈 값을 입력한 경우")
     @Test
     void password_empty() {
-        assertEquals(meter.meter(""), PasswordStrength.INVALID);
+        assertEquals(PasswordStrength.INVALID, meter.meter(""));
     }
 
     @DisplayName("모든 조건을 만족하는 경우")
     @Test
     void strong() {
-        assertEquals(meter.meter("1234ABCD"), PasswordStrength.STRONG);
+        assertEquals(PasswordStrength.STRONG, meter.meter("1234ABCD"));
     }
 
     @DisplayName("길이가 8 글자 미만이며 다른 조건은 만족하는 경우")
     @Test
     void normal_length_under_8() {
-        assertEquals(meter.meter("123ABCD"), PasswordStrength.NORMAL);
+        assertEquals(PasswordStrength.NORMAL, meter.meter("123ABCD"));
     }
 
     @DisplayName("숫자를 포함하지 않으며 다른 조건은 만족하는 경우")
     @Test
     void normal_not_contains_number() {
-        assertEquals(meter.meter("ABCDEFGH"), PasswordStrength.NORMAL);
+        assertEquals(PasswordStrength.NORMAL, meter.meter("ABCDEFGH"));
     }
 
     @DisplayName("대문자를 포함하지 않으며 다른 조건은 만족하는 경우")
     @Test
     void normal_not_contains_capital() {
-        assertEquals(meter.meter("1234abcd"), PasswordStrength.NORMAL);
+        assertEquals(PasswordStrength.NORMAL, meter.meter("1234abcd"));
     }
 
     @DisplayName("길이가 8 글자 이상인 조건만 만족하는 경우")
     @Test
     void weak_only_length_over_8() {
-        assertEquals(meter.meter("abcdefgh"), PasswordStrength.WEAK);
+        assertEquals(PasswordStrength.WEAK, meter.meter("abcdefgh"));
+    }
+
+    @DisplayName("숫자 포함 조건만 만족하는 경우")
+    @Test
+    void weak_only_contains_number() {
+        assertEquals(PasswordStrength.WEAK, meter.meter("1234567"));
     }
 
     // TODO: 길이가 7 글자이며 0 부터 9 사이의 숫자를 포함하지 않는 경우 -> 약함

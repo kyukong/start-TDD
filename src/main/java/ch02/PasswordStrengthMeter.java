@@ -22,7 +22,8 @@ public class PasswordStrengthMeter {
     }
 
     private boolean isWeak(final String string) {
-        return isOverValidLength(string) && !isContainsNumber(string) && !isContainsCapital(string);
+        return (isOverValidLength(string) && !isContainsNumber(string) && !isContainsCapital(string))
+                || (!isOverValidLength(string) && isContainsNumber(string) && !isContainsCapital(string));
     }
 
     private boolean isNormal(final String string) {
